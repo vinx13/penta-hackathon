@@ -1,5 +1,6 @@
 import jm.midi.MidiSynth;
 import jm.music.data.Part;
+import jm.music.data.Phrase;
 import jm.music.data.Score;
 import jm.util.Play;
 import jm.util.Write;
@@ -10,11 +11,19 @@ import jm.util.Write;
 public class Application {
     public static void main(String[] args) {
         SubjectGenerator generator = new SubjectGenerator();
-        Part subjectPart = generator.generateSubjectPart();
+        Phrase subject = generator.generateSubject();
+        Part soprano = new Part(),alto = new Part(), bass = new Part();
+        soprano.add(subject);
+
         Score score = new Score();
+
         score.setDenominator(4);
         score.setNumerator(4);
-        score.add(subjectPart);
+
+        score.add(soprano);
+        score.add(alto);
+        score.add(bass);
         Write.midi(score, "awesome.midi");
     }
+
 }
