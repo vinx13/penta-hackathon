@@ -7,7 +7,7 @@ import com.sun.tools.corba.se.idl.constExpr.Not;
 public class Evaluator implements GA.Fitness<Subject, Double> {
 
     private final int[] target = {10, 20, 30, 40, 50};
-    private final boolean DEBUG = true;
+    private final boolean DEBUG = false;
 
     private SubjectReader reader = new SubjectReader();
 
@@ -44,7 +44,7 @@ public class Evaluator implements GA.Fitness<Subject, Double> {
         fitnesses[5] = phase6(1.0);
         fitnesses[6] = phase7(1.0);
         fitnesses[7] = phase8(1.0);
-        fitnesses[8] = phase9(1.0);
+        fitnesses[8] = phase9(10000.0);
         double fitness = 0.0;
         for (int i = 0; i < 9; i++)
             fitness += fitnesses[i];
@@ -177,8 +177,8 @@ public class Evaluator implements GA.Fitness<Subject, Double> {
 
     double phase9(double factor) {
         reader.reset();
-        int delta = 18;
-        int cen = 60; /* middle C */
+        int delta = 10;
+        int cen = 66;
         int lo = cen - delta;
         int hi = cen + delta;
         int total = 0;

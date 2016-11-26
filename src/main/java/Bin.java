@@ -30,6 +30,8 @@ public class Bin {
 
     public int getPitch() {
         int pitch = toInt(0, 7);
+        //System.out.println(String.format("Pitch = %d", pitch));
+
         return pitch;
     }
 

@@ -7,7 +7,7 @@ import sun.jvm.hotspot.debugger.MachineDescriptionIntelX86;
  * Created by Vincent on 2016/11/26.
  */
 public class SubjectGenerator {
-    private static final int MAX_ITERATION = 500;
+    private static final int MAX_ITERATION = 1000;
 
     public Phrase generateSubject() {
         Population<Subject> population = createInitialPopulation(100);
@@ -18,7 +18,7 @@ public class SubjectGenerator {
         addListener(ga);
 
         ga.evolve(MAX_ITERATION);
-        Subject subject = ga.getPopulation().getChromosomeByIndex(0);
+        Subject subject = ga.getBest();
         return subject.toPhrase();
     }
 
@@ -55,7 +55,7 @@ public class SubjectGenerator {
                 int iteration = ga.getIteration();
 
                 // Listener prints best achieved solution
-                System.out.println(String.format("%s\t%s\t%s", iteration, bestFit, best));
+                //System.out.println(String.format("%s\t%s\t%s", iteration, bestFit, best));
 
                 // If fitness is satisfying - we can stop Genetic algorithm
                 if (bestFit < this.threshold) {

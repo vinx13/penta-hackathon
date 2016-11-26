@@ -20,7 +20,8 @@ public class Subject implements Chromosome<Subject>, Cloneable {
         vector = new Bin[64];
         for (int i = 0; i < 64; i++) {
             Bin bin = new Bin();
-            bin.setValue(random.nextInt());
+            bin.setValue(random.nextInt(1<<9));
+            //System.out.print(bin.toString());
             vector[i] = bin;
         }
     }
@@ -34,9 +35,13 @@ public class Subject implements Chromosome<Subject>, Cloneable {
 
         // just select random element of vector
         // and increase or decrease it on small value
-        int index = random.nextInt(this.vector.length);
-        int mutationValue = random.nextInt();
-        result.vector[index].setValue(mutationValue); // perform bin level mutations
+
+        int count = 3;
+        for(int i = 0; i < count; i++) {
+            int index = random.nextInt(this.vector.length);
+            int mutationValue = random.nextInt(1 << 10);
+            result.vector[index].setValue(mutationValue); // perform bin level mutations
+        }
         return result;
     }
 
@@ -78,7 +83,6 @@ public class Subject implements Chromosome<Subject>, Cloneable {
     }
 
     Phrase toPhrase() {
-        Part part = new Part();
         Phrase phrase = new Phrase(0.0);
         SubjectReader reader = new SubjectReader(this);
 
