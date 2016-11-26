@@ -44,7 +44,7 @@ public class Evaluator implements GA.Fitness<Subject, Double> {
         fitnesses[5] = phase6(1.0);
         fitnesses[6] = phase7(1.0);
         fitnesses[7] = phase8(1.0);
-        fitnesses[8] = phase9(10000.0);
+        fitnesses[8] = phase9(1.0);
         double fitness = 0.0;
         for (int i = 0; i < 9; i++)
             fitness += fitnesses[i];

@@ -16,7 +16,7 @@ public class Subject implements Chromosome<Subject>, Cloneable {
     private static final Random random = new Random();
     private final Bin[] vector;
     private static int nextValidInt(){
-        return random.nextInt(192)+144;
+        return random.nextInt(75)+216;
     }
     public Subject() {
         vector = new Bin[64];
