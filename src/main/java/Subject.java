@@ -77,19 +77,15 @@ public class Subject implements Chromosome<Subject>, Cloneable {
         return Arrays.toString(this.vector);
     }
 
-    Part toPart() {
+    Phrase toPhrase() {
         Part part = new Part();
-        Phrase[] phrases = new Phrase[4];
+        Phrase phrase = new Phrase(0.0);
         SubjectReader reader = new SubjectReader(this);
-        for (int i = 0; i < 4; i++) {
-            Phrase phrase = new Phrase(i * 4.0);
-            part.add(phrase);
-            phrases[i] = phrase;
-        }
+
         while (reader.next()) {
-            phrases[reader.getCurrentBarIndex()].add(reader.getNote());
+            phrase.add(reader.getNote());
         }
-        return part;
+        return phrase;
     }
 
 }

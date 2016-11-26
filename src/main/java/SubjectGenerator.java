@@ -1,5 +1,6 @@
 import GA.*;
 import jm.music.data.Part;
+import jm.music.data.Phrase;
 import sun.jvm.hotspot.debugger.MachineDescriptionIntelX86;
 
 /**
@@ -8,7 +9,7 @@ import sun.jvm.hotspot.debugger.MachineDescriptionIntelX86;
 public class SubjectGenerator {
     private static final int MAX_ITERATION = 500;
 
-    public Part generateSubjectPart() {
+    public Phrase generateSubject() {
         Population<Subject> population = createInitialPopulation(100);
         Evaluator evaluator = new Evaluator();
 
@@ -18,7 +19,7 @@ public class SubjectGenerator {
 
         ga.evolve(MAX_ITERATION);
         Subject subject = ga.getPopulation().getChromosomeByIndex(0);
-        return subject.toPart();
+        return subject.toPhrase();
     }
 
 
