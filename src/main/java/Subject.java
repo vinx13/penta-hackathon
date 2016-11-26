@@ -15,12 +15,14 @@ import GA.*;
 public class Subject implements Chromosome<Subject>, Cloneable {
     private static final Random random = new Random();
     private final Bin[] vector;
-
+    private static int nextValidInt(){
+        return random.nextInt(192)+144;
+    }
     public Subject() {
         vector = new Bin[64];
         for (int i = 0; i < 64; i++) {
             Bin bin = new Bin();
-            bin.setValue(random.nextInt(1<<9));
+            bin.setValue(nextValidInt());
             //System.out.print(bin.toString());
             vector[i] = bin;
         }
@@ -36,10 +38,10 @@ public class Subject implements Chromosome<Subject>, Cloneable {
         // just select random element of vector
         // and increase or decrease it on small value
 
-        int count = 3;
+        int count = 16;
         for(int i = 0; i < count; i++) {
             int index = random.nextInt(this.vector.length);
-            int mutationValue = random.nextInt(1 << 10);
+            int mutationValue = nextValidInt();
             result.vector[index].setValue(mutationValue); // perform bin level mutations
         }
         return result;

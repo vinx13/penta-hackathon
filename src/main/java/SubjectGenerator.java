@@ -10,7 +10,7 @@ public class SubjectGenerator {
     private static final int MAX_ITERATION = 1000;
 
     public Phrase generateSubject() {
-        Population<Subject> population = createInitialPopulation(100);
+        Population<Subject> population = createInitialPopulation(10);
         Evaluator evaluator = new Evaluator();
 
         GeneticAlgorithm<Subject, Double> ga = new GeneticAlgorithm<Subject, Double>(population, evaluator);
@@ -19,18 +19,20 @@ public class SubjectGenerator {
 
         ga.evolve(MAX_ITERATION);
         Subject subject = ga.getBest();
+        evaluator.calculate(subject);
         return subject.toPhrase();
+        //return new Subject().toPhrase();
     }
 
 
     private Population<Subject> createInitialPopulation(int populationSize) {
         Population<Subject> population = new Population<Subject>();
-        Subject base = new Subject();
+        //Subject base = new Subject();
         for (int i = 0; i < populationSize; i++) {
             // each member of initial population
             // is mutated clone of base chromosome
-            Subject subject = base.mutate();
-            population.addChromosome(subject);
+            //Subject subject = base.mutate();
+            population.addChromosome(new Subject());
         }
         return population;
     }
@@ -55,7 +57,7 @@ public class SubjectGenerator {
                 int iteration = ga.getIteration();
 
                 // Listener prints best achieved solution
-                //System.out.println(String.format("%s\t%s\t%s", iteration, bestFit, best));
+                System.out.println(String.format("%s\t%s\t%s", iteration, bestFit, best));
 
                 // If fitness is satisfying - we can stop Genetic algorithm
                 if (bestFit < this.threshold) {

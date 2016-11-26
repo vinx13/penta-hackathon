@@ -13,10 +13,10 @@ public class Application {
     public static void main(String[] args) {
         SubjectGenerator generator = new SubjectGenerator();
         Phrase subject = generator.generateSubject();
-        Phrase answer = generateAnswer(subject);
+        //Phrase answer = generateAnswer(subject);
         Part soprano = new Part(), alto = new Part(), bass = new Part();
         soprano.add(subject);
-        soprano.add(answer);
+        //soprano.add(answer);
         Score score = new Score();
 
         score.setDenominator(4);

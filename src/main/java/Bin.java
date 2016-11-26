@@ -29,14 +29,14 @@ public class Bin {
     }
 
     public int getPitch() {
-        int pitch = toInt(0, 7);
+        int pitch = toInt(2, 9);
         //System.out.println(String.format("Pitch = %d", pitch));
 
         return pitch;
     }
 
     public BinStyle getStyle() {
-        int style = toInt(7, 9);
+        int style = toInt(0, 2);
         if (style < 2) return BinStyle.LINK;
         if (style == 2) return BinStyle.REST;
         if (style == 3) return BinStyle.END;
