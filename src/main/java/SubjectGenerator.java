@@ -1,4 +1,7 @@
 import GA.*;
+import jm.constants.Pitches;
+import jm.constants.RhythmValues;
+import jm.music.data.Note;
 import jm.music.data.Part;
 import jm.music.data.Phrase;
 import sun.jvm.hotspot.debugger.MachineDescriptionIntelX86;
@@ -7,10 +10,11 @@ import sun.jvm.hotspot.debugger.MachineDescriptionIntelX86;
  * Created by Vincent on 2016/11/26.
  */
 public class SubjectGenerator {
-    private static final int MAX_ITERATION = 1000;
+    private static final int MAX_ITERATION = 4000;
 
     public Phrase generateSubject() {
-        Population<Subject> population = createInitialPopulation(10);
+
+        Population<Subject> population = createInitialPopulation(30);
         Evaluator evaluator = new Evaluator();
 
         GeneticAlgorithm<Subject, Double> ga = new GeneticAlgorithm<Subject, Double>(population, evaluator);
@@ -21,7 +25,23 @@ public class SubjectGenerator {
         Subject subject = ga.getBest();
         evaluator.calculate(subject);
         return subject.toPhrase();
-        //return new Subject().toPhrase();
+
+        /*
+        Phrase subject = new Phrase();
+        subject.add(new Note(Pitches.G4, RhythmValues.QN));
+        subject.add(new Note(Pitches.BF4,RhythmValues.QN));
+        subject.add(new Note(Pitches.A4,RhythmValues.QN));
+        subject.add(new Note(Pitches.D4, RhythmValues.QN));
+
+        subject.add(new Note(Pitches.A4,RhythmValues.EN));
+        subject.add(new Note(Pitches.BF4,RhythmValues.EN));
+        subject.add(new Note(Pitches.C5,RhythmValues.EN));
+        subject.add(new Note(Pitches.A4, RhythmValues.EN));
+        subject.add(new Note(Pitches.BF4, RhythmValues.EN));
+        subject.add(new Note(Pitches.A4,RhythmValues.EN));
+        subject.add(new Note(Pitches.G4,RhythmValues.QN));
+        return subject;
+        */
     }
 
 

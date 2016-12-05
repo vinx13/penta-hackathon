@@ -37,8 +37,8 @@ public class Bin {
 
     public BinStyle getStyle() {
         int style = toInt(0, 2);
-        if (style < 2) return BinStyle.LINK;
-        if (style == 2) return BinStyle.REST;
+        if (style <= 2) return BinStyle.LINK;
+        //if (style == 2) return BinStyle.REST;
         if (style == 3) return BinStyle.END;
         return null;
     }

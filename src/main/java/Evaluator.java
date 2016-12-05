@@ -1,4 +1,5 @@
 import com.sun.tools.corba.se.idl.constExpr.Not;
+import com.sun.tools.javac.code.Attribute;
 
 /**
  * Created by Vincent on 2016/11/26.
@@ -6,7 +7,6 @@ import com.sun.tools.corba.se.idl.constExpr.Not;
 
 public class Evaluator implements GA.Fitness<Subject, Double> {
 
-    private final int[] target = {10, 20, 30, 40, 50};
     private final boolean DEBUG = false;
 
     private SubjectReader reader = new SubjectReader();
@@ -35,18 +35,19 @@ public class Evaluator implements GA.Fitness<Subject, Double> {
     @Override
     public Double calculate(Subject chromosome) {
         reader.setSubject(chromosome);
-        Double[] fitnesses = new Double[9];
-        fitnesses[0] = phase1(1.0);
+        Double[] fitnesses = new Double[10];
+        fitnesses[0] = phase1(2.0);
         fitnesses[1] = phase2(1.0);
-        fitnesses[2] = phase3(1.0);
+        fitnesses[2] = phase3(9.5);
         fitnesses[3] = phase4(1.0);
-        fitnesses[4] = phase5(1.0);
+        fitnesses[4] = phase5(4.0);
         fitnesses[5] = phase6(1.0);
-        fitnesses[6] = phase7(1.0);
-        fitnesses[7] = phase8(1.0);
+        fitnesses[6] = phase7(3.0);
+        fitnesses[7] = phase8(-0.3);
         fitnesses[8] = phase9(1.0);
+        fitnesses[9] = phase10(30.0);
         double fitness = 0.0;
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < fitnesses.length; i++)
             fitness += fitnesses[i];
 
         return fitness;
@@ -193,6 +194,35 @@ public class Evaluator implements GA.Fitness<Subject, Double> {
         return fitness;
     }
 
+    double phase10(double factor) {
+        // pitch
+        reader.reset();
+        int total = 0;
+        int lastPitch = 0;
+        while (reader.next()) {
+            if (reader.getNoteType() == Bin.NoteType.Normal) {
+                lastPitch = reader.getNotePitch();
+                break;
+            }
+        }
+        int[] unharmonizedIntervals = new int[]{1, 2, 3, 4, 6, 10, 11};
+        while (reader.next()) {
+            if (reader.getNoteType() == Bin.NoteType.Normal) {
+                int pitch = reader.getNotePitch();
+                int diff = Math.abs(pitch - lastPitch);
+                for (int i = 0; i < unharmonizedIntervals.length; i++) {
+                    if (unharmonizedIntervals[i] == diff || unharmonizedIntervals[i] + 12 == diff) {
+                        ++total;
+                        break;
+                    }
+                }
+                lastPitch = pitch;
+            }
+        }
+        double fitness = total * factor;
+        print(10, fitness);
+        return fitness;
+    }
 
     void print(int phase, double fitness) {
 
