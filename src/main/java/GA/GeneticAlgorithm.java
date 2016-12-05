@@ -1,4 +1,8 @@
 /*******************************************************************************
+ * Ref: https://github.com/lagodiuk/genetic-algorithm/tree/7e25aa39d40b2ebcb6e5e2b59320e0be1ea8b02a
+ ******************************************************************************/
+
+/*******************************************************************************
  * Copyright 2012 Yuriy Lagodiuk
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
